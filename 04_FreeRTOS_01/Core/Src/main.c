@@ -22,7 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stdio.h"	//±Í◊º ‰»Î ‰≥ˆø‚
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -51,10 +51,19 @@ osThreadId LEDHandle;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
-void LEDTask(void const * argument);
+void LEDTask(void const * argument);		//…˘√˜»ŒŒÒ µœ÷∫Ø ˝
 
 /* USER CODE BEGIN PFP */
-
+#ifdef __GNUC__									//¥Æø⁄÷ÿ∂®œÚ
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif
+PUTCHAR_PROTOTYPE
+{
+    HAL_UART_Transmit(&huart1 , (uint8_t *)&ch, 1, 0xFFFF);
+    return ch;
+}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -93,7 +102,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);		//‰∏§ÁÅØÂàùÂßãÁä∂ÊÄÅÈÉΩ‰∏∫ÁÜÑÁÅ≠
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);		//LEDµ∆∑≠◊™
   /* USER CODE END 2 */
 
   /* USER CODE BEGIN RTOS_MUTEX */
@@ -114,7 +123,7 @@ int main(void)
 
   /* Create the thread(s) */
   /* definition and creation of LED */
-  osThreadDef(LED, LEDTask, osPriorityNormal, 0, 128);
+  osThreadDef(LED, LEDTask, osPriorityNormal, 0, 128);		//¥¥Ω®»ŒŒÒ
   LEDHandle = osThreadCreate(osThread(LED), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
@@ -122,7 +131,7 @@ int main(void)
   /* USER CODE END RTOS_THREADS */
 
   /* Start scheduler */
-  osKernelStart();
+  osKernelStart();		//∆Ù∂Ø»ŒŒÒ£¨ø™∆Ùµ˜∂»
 
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
@@ -259,6 +268,7 @@ __weak void LEDTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
+	printf("Œ“ «LED»ŒŒÒ\r\n");
 	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_4);
 	osDelay(500);
 	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_5);
