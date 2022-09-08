@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "stdio.h"	//æ·»åŠ æ ‡å‡†åº“æ”¯æŒ
+#include "stdio.h"	//ÒıÈë±ê×¼¿âÎÄ¼ş
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,15 +50,40 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
-#ifdef __GNUC__									//ä¸²å£é‡å®šå‘
-#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+//#ifdef __GNUC__									//´®¿ÚÖØ¶¨Ïò
+//#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+//#else
+//#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+//#endif
+//PUTCHAR_PROTOTYPE
+//{
+//    HAL_UART_Transmit(&huart1 , (uint8_t *)&ch, 1, 0xFFFF);
+//    return ch;
+//}
+
+#ifdef __GNUC__
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)   //STM32CubeIDE
 #else
-#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)  //Keil
+
 #endif
 PUTCHAR_PROTOTYPE
 {
-    HAL_UART_Transmit(&huart1 , (uint8_t *)&ch, 1, 0xFFFF);
-    return ch;
+	HAL_UART_Transmit(&huart1, (uint8_t*)&ch, 1, HAL_MAX_DELAY);
+	return ch;
+}
+
+int _write(int file, char *ptr, int len)
+{
+	int DataIdx;
+
+	for(DataIdx=0; DataIdx<len; DataIdx++)
+	{
+		__io_putchar(*ptr++);
+	}
+
+	return len;
 }
 /* USER CODE END PFP */
 
@@ -110,7 +135,7 @@ int main(void)
 	 HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,GPIO_PIN_RESET);
 	 HAL_GPIO_WritePin(GPIOC,GPIO_PIN_5,GPIO_PIN_SET);
 	 HAL_Delay(500);
-	 printf("Hi!\r\n");
+	 printf("ÄãºÃ!\r\n");
 	 HAL_Delay(1000);
     /* USER CODE END WHILE */
 
