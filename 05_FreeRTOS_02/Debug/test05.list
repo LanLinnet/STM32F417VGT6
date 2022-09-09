@@ -991,8 +991,8 @@ __weak void StartLED1Task(void const * argument)
  8000896:	2110      	movs	r1, #16
  8000898:	4804      	ldr	r0, [pc, #16]	; (80008ac <StartLED1Task+0x30>)
  800089a:	f000 fd6b 	bl	8001374 <HAL_GPIO_WritePin>
-    osDelay(1000);
- 800089e:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+    osDelay(500);
+ 800089e:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
  80008a2:	f002 fd4a 	bl	800333a <osDelay>
 	printf("∫Ïµ∆¡¡\r\n");
  80008a6:	e7ed      	b.n	8000884 <StartLED1Task+0x8>
@@ -1027,8 +1027,8 @@ __weak void StartLED2Task(void const * argument)
  80008ca:	2120      	movs	r1, #32
  80008cc:	4804      	ldr	r0, [pc, #16]	; (80008e0 <StartLED2Task+0x30>)
  80008ce:	f000 fd51 	bl	8001374 <HAL_GPIO_WritePin>
-    osDelay(1000);
- 80008d2:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+    osDelay(500);
+ 80008d2:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
  80008d6:	f002 fd30 	bl	800333a <osDelay>
 	printf("ª∆µ∆¡¡\r\n");
  80008da:	e7ed      	b.n	80008b8 <StartLED2Task+0x8>

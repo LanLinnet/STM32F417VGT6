@@ -328,7 +328,7 @@ __weak void StartLED1Task(void const * argument)
 	printf("ºìµÆÁÁ\r\n");
 	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);	//¹ØLEDµÆ2
 	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);		//¿ªLEDµÆ1
-    osDelay(1000);
+    osDelay(500);
   }
   /* USER CODE END StartLED1Task */
 }
@@ -349,7 +349,7 @@ __weak void StartLED2Task(void const * argument)
 	printf("»ÆµÆÁÁ\r\n");
 	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);	//¹ØLEDµÆ1
 	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);		//¿ªLEDµÆ2
-    osDelay(1000);
+    osDelay(500);
   }
   /* USER CODE END StartLED2Task */
 }
