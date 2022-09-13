@@ -25,7 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -59,7 +59,7 @@ osMessageQId TestQueueHandle;
 
 void StartLEDTask(void const * argument);
 void ReceiveTask(void const * argument);
-void SendTadk(void const * argument);
+void SendTask(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -120,7 +120,7 @@ void MX_FREERTOS_Init(void) {
   ReceiveHandle = osThreadCreate(osThread(Receive), NULL);
 
   /* definition and creation of Send */
-  osThreadDef(Send, SendTadk, osPriorityIdle, 0, 128);
+  osThreadDef(Send, SendTask, osPriorityIdle, 0, 128);
   SendHandle = osThreadCreate(osThread(Send), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
@@ -142,7 +142,10 @@ __weak void StartLEDTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
+	osDelay(500);
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
+    osDelay(500);
   }
   /* USER CODE END StartLEDTask */
 }
@@ -157,30 +160,54 @@ __weak void StartLEDTask(void const * argument)
 void ReceiveTask(void const * argument)
 {
   /* USER CODE BEGIN ReceiveTask */
+  osEvent event;
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	event = osMessageGet(TestQueueHandle, osWaitForever);
+	if(osEventMessage == event.status)
+	{
+		printf("Receive data: %d\r\n", (int)event.value.v);
+	}
+	else
+	{
+		printf("Error: 0x%d\r\n", event.status);
+	}
+    osDelay(100);
   }
   /* USER CODE END ReceiveTask */
 }
 
-/* USER CODE BEGIN Header_SendTadk */
+/* USER CODE BEGIN Header_SendTask */
 /**
 * @brief Function implementing the Send thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_SendTadk */
-void SendTadk(void const * argument)
+/* USER CODE END Header_SendTask */
+void SendTask(void const * argument)
 {
-  /* USER CODE BEGIN SendTadk */
+  /* USER CODE BEGIN SendTask */
+  osEvent xReturn;
+  uint32_t send_data1 = 100;
+  uint8_t count=0;
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	if(count==100)
+	{
+		count = 0;
+		printf("Send data!\r\n");
+		xReturn.status = osMessagePut(TestQueueHandle,send_data1,0);
+		if(osOK != xReturn.status)
+		{
+			printf("Send failed!\r\n");
+		}
+	}
+	count++;
+    osDelay(100);
   }
-  /* USER CODE END SendTadk */
+  /* USER CODE END SendTask */
 }
 
 /* Private application code --------------------------------------------------*/

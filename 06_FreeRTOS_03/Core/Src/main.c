@@ -24,7 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "stdio.h"	//å¼•å…¥æ ‡å‡†åº“æ–‡ä»¶
+#include "stdio.h"	//ÒıÓÃ±ê×¼¿âÎÄ¼ş
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -113,7 +113,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);//ä¸¤ç¯åˆå§‹åŒ–å‡ç†„ç­
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);//³õÊ¼µÆÃğ
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
