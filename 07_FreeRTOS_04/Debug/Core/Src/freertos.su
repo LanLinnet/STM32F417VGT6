@@ -1,0 +1,5 @@
+../Core/Src/freertos.c:74:6:vApplicationGetIdleTaskMemory	24	static
+../Core/Src/freertos.c:88:6:MX_FREERTOS_Init	120	static
+../Core/Src/freertos.c:144:13:StartLEDTask	16	static
+../Core/Src/freertos.c:166:6:ReceiveTask	24	static
+../Core/Src/freertos.c:203:6:SendTask	24	static
