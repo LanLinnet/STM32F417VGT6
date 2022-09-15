@@ -1,0 +1,6 @@
+../Core/Src/freertos.c:75:6:vApplicationGetIdleTaskMemory	24	static
+../Core/Src/freertos.c:89:6:MX_FREERTOS_Init	136	static
+../Core/Src/freertos.c:144:6:StartLEDTask	16	static
+../Core/Src/freertos.c:165:6:LowPriorityTask	24	static,ignoring_inline_asm
+../Core/Src/freertos.c:201:6:MidPriorityTask	16	static
+../Core/Src/freertos.c:220:6:HighPriorityTask	24	static
