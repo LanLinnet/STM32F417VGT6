@@ -1,0 +1,4 @@
+../Core/Src/freertos.c:94:6:MX_FREERTOS_Init	8	static
+../Core/Src/freertos.c:146:13:StartLEDTask	16	static
+../Core/Src/freertos.c:164:6:SendTask	24	static
+../Core/Src/freertos.c:194:6:ReceiveTask	24	static
