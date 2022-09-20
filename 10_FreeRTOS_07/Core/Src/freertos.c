@@ -157,12 +157,16 @@ void MX_FREERTOS_Init(void) {
 void StartDefaultTask(void const * argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
+  printf("我在循环外\r\n");
+  uint8_t count = 0;
   /* Infinite loop */
   for(;;)
   {
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
     osDelay(500);
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
+    printf("我在循环内 %d\r\n",(int)count);
+    count++;
     osDelay(500);
   }
   /* USER CODE END StartDefaultTask */
