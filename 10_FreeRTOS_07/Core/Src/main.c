@@ -24,7 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "stdio.h"	//引用标准库
+#include <stdio.h>	//引用标准库
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
