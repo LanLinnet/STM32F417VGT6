@@ -1,0 +1,8 @@
+../Core/Src/freertos.c:77:13:configureTimerForRunTimeStats	4	static
+../Core/Src/freertos.c:82:22:getRunTimeCounterValue	4	static
+../Core/Src/freertos.c:92:6:vApplicationGetIdleTaskMemory	24	static
+../Core/Src/freertos.c:106:6:MX_FREERTOS_Init	128	static
+../Core/Src/freertos.c:157:6:StartDefaultTask	16	static
+../Core/Src/freertos.c:175:6:LED1Task	16	static
+../Core/Src/freertos.c:198:6:LED2Task	16	static
+../Core/Src/freertos.c:221:6:CPUTask	416	static
